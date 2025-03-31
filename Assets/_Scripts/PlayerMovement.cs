@@ -4,7 +4,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
     [SerializeField] private float moveSpeed = 1f;
-
+    [SerializeField] private int PlayerHealth = 3;
+    private int currentHealth;
     private PlayerControls playerControls;
     private Vector2 movement;
     private Rigidbody2D rb;
@@ -13,7 +14,10 @@ public class PlayerMovement : MonoBehaviour
 
     private bool facingLeft = false;
 
-
+    private void Start()
+    {
+        currentHealth = PlayerHealth;
+    }
     private void Awake()
     {
         playerControls = new PlayerControls();
@@ -71,5 +75,18 @@ public class PlayerMovement : MonoBehaviour
             mySpriteRenderer.flipX = true;
             FacingLeft = true;
         }
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        Debug.Log("Player Health: " + currentHealth);
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }

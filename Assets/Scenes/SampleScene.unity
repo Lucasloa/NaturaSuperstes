@@ -633,9 +633,12 @@ GameObject:
   - component: {fileID: 1595237374}
   - component: {fileID: 1595237375}
   - component: {fileID: 1595237376}
+  - component: {fileID: 1595237377}
+  - component: {fileID: 1595237378}
+  - component: {fileID: 1595237379}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -762,6 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  PlayerHealth: 3
 --- !u!95 &1595237375
 Animator:
   serializedVersion: 7
@@ -818,9 +822,64 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.008352099, y: -0.13180056}
-  m_Size: {x: 0.099139586, y: 0.056501474}
+  m_Offset: {x: -0.005203242, y: -0.11605744}
+  m_Size: {x: 0.08925335, y: 0.087993495}
   m_Direction: 1
+--- !u!114 &1595237377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595237369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42ef189befe0ea4b8f0ee323c071b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements: []
+  fires:
+  - {fileID: 1595237378}
+  - {fileID: 1595237378}
+  waters:
+  - {fileID: 1595237379}
+  attackDelay: 1
+--- !u!114 &1595237378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595237369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15374d18332263242941a184300960de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 0.5
+  isAttacking: 0
+  damage: 0
+  levelBonus: 0
+  projectilePrefab: {fileID: 3278090141534693313, guid: 50b16596c1b03b94282f3f49c6f07e40, type: 3}
+  projectileSpeed: 7
+--- !u!114 &1595237379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595237369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39c5bf10fe51514f94d5582ab008837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 0.5
+  isAttacking: 0
+  damage: 0
+  levelBonus: 0
+  projectilePrefab: {fileID: 405405269380325023, guid: c3905b9425feaa24da4d7744367c4833, type: 3}
+  projectileSpeed: 10
 --- !u!1 &1636632100
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,12 +1050,12 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.3, y: 0.17}
+  m_Offset: {x: 0, y: -0.09966305}
+  m_Size: {x: 0.3, y: 0.39352268}
   m_Direction: 0
 --- !u!114 &1636632106
 MonoBehaviour:
