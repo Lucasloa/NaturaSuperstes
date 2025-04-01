@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -5,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private int PlayerHealth = 3;
+    [SerializeField] private TextMeshProUGUI hpText;
     private int currentHealth;
     private PlayerControls playerControls;
     private Vector2 movement;
@@ -16,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        UpdateHealthUI();
         currentHealth = PlayerHealth;
     }
     private void Awake()
@@ -80,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
     {
         currentHealth -= damage;
         Debug.Log("Player Health: " + currentHealth);
+        UpdateHealthUI();
         if (currentHealth <= 0)
         {
             Die();
@@ -88,5 +92,12 @@ public class PlayerMovement : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+    }
+    public void UpdateHealthUI()
+    {
+        if (hpText != null)
+        {
+            hpText.text = "HP: " + currentHealth;
+        }
     }
 }

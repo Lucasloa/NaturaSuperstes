@@ -10,13 +10,14 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private List<Fire> fires; // List of elements
     [SerializeField] private List<Water> waters; // List of elements
     [SerializeField] private float attackDelay;
+    [SerializeField] private GameObject fireprefab;
     private bool isFireAttacking = false;
     private bool isWaterAttacking = false;
     //private bool isAttacking = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -51,11 +52,12 @@ public class PlayerAttack : MonoBehaviour
     //}
     public IEnumerator FireAttack()
     {
+        List<Fire> newfires = new List<Fire>(fires);
         isFireAttacking = true;
-        foreach (Fire element in fires)
+        foreach (Fire element in newfires)
         {
             element.Attack();
-            yield return new WaitForSeconds(attackDelay / fires.Count);
+            yield return new WaitForSeconds(attackDelay / newfires.Count);
         }
         yield return new WaitForSeconds(attackDelay);
         isFireAttacking = false;
@@ -70,5 +72,27 @@ public class PlayerAttack : MonoBehaviour
         }
         yield return new WaitForSeconds(attackDelay);
         isWaterAttacking = false;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("FirePickup"))
+        {
+            Debug.Log("Fire");
+            Fire fire = collision.GetComponent<Fire>();
+            if (fire != null)
+            {
+                GotElement(fire);
+                Debug.Log("Got added");
+                Destroy(collision.gameObject);
+            }
+        }
+        if (collision.CompareTag("WaterPickup"))
+        {
+            Water water = collision.GetComponent<Water>();
+            if (water != null)
+            {
+                GotElement(water);
+            }
+        }
     }
 }

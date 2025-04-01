@@ -10,6 +10,11 @@ public class Fire : Element
     [SerializeField] private float levelBonus;
     [SerializeField] private GameObject projectilePrefab; // Reference to the projectile prefab
     [SerializeField] private float projectileSpeed = 10f; // Speed of the projectile    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private Transform fireballspawn;
+
+    public Fire()
+    {
+    }
     void Start()
     {
         
@@ -31,13 +36,24 @@ public class Fire : Element
         //}
 
         // Instantiate the projectile at the current position and rotation
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        GameObject projectile = Instantiate(projectilePrefab, fireballspawn.position, Quaternion.identity);
 
         // Set the projectile's velocity to shoot it along the x-axis
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
             rb.linearVelocity = new Vector2(projectileSpeed, 0);
+        }
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("EnemyBats"))
+        {
+            EnemyAI enemy = collision.GetComponent<EnemyAI>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
         }
     }
 }
