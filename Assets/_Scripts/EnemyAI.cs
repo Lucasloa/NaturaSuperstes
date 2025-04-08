@@ -6,15 +6,16 @@ public class EnemyAI : MonoBehaviour
     public Transform player;       // Reference to the player's position
     public float moveSpeed = 5f;   // Movement speed of the object
     private int damage = 1;        // Damage dealt to the player
-    private float hp = 1;        // Health of the object
+    private float hp = 3;        // Health of the object
     private float currenthp;
     private Rigidbody2D rb;        // Rigidbody2D component
     private float damageCooldown = 30f; // Cooldown for dealing damage
     private float nextDamageTime = 0f; // Cooldown for dealing damage
     private Vector2 moveDir;
+    [SerializeField] private GameObject currencyPrefab; // Reference to the currency prefab
 
 
-    void Start()
+    void Awake()
     {
         // Get the Rigidbody2D component
         rb = GetComponent<Rigidbody2D>();
@@ -48,6 +49,7 @@ public class EnemyAI : MonoBehaviour
     private void Die()
     {
         this.gameObject.SetActive(false);
+        Instantiate(currencyPrefab, transform.position, Quaternion.identity);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {

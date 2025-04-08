@@ -4,13 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private List<Element> elements; // List of elements
     [SerializeField] private List<Fire> fires; // List of elements
     [SerializeField] private List<Water> waters; // List of elements
     [SerializeField] private float attackDelay;
-    [SerializeField] private GameObject fireprefab;
     private bool isFireAttacking = false;
     private bool isWaterAttacking = false;
     //private bool isAttacking = false;
@@ -64,18 +64,19 @@ public class PlayerAttack : MonoBehaviour
     }
     public IEnumerator WaterAttack()
     {
+        List<Water> newwaters = new List<Water>(waters);
         isWaterAttacking = true;
-        foreach (Water element in waters)
+        foreach (Water element in newwaters)
         {
             element.Attack();
-            yield return new WaitForSeconds(attackDelay / waters.Count);
+            yield return new WaitForSeconds(attackDelay / newwaters.Count);
         }
         yield return new WaitForSeconds(attackDelay);
         isWaterAttacking = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("FirePickup"))
+        if (collision.gameObject.CompareTag("FirePickup"))
         {
             Debug.Log("Fire");
             Fire fire = collision.GetComponent<Fire>();
@@ -83,7 +84,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 GotElement(fire);
                 Debug.Log("Got added");
-                Destroy(collision.gameObject);
+                fire.gameObject.SetActive(false); // Deactivate the fire pickup object
             }
         }
         if (collision.CompareTag("WaterPickup"))
@@ -92,7 +93,10 @@ public class PlayerAttack : MonoBehaviour
             if (water != null)
             {
                 GotElement(water);
+                water.gameObject.SetActive(false); // Deactivate the water pickup object
             }
         }
+
     }
+
 }
