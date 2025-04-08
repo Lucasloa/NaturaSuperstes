@@ -6,30 +6,45 @@ public class EnemyAI : MonoBehaviour
     public Transform player;       // Reference to the player's position
     public float moveSpeed = 5f;   // Movement speed of the object
     private int damage = 1;        // Damage dealt to the player
-    private float hp = 1;        // Health of the object
+    [SerializeField]
+    private float hp = 3;        // Health of the object
     private float currenthp;
     private Rigidbody2D rb;        // Rigidbody2D component
     private float damageCooldown = 30f; // Cooldown for dealing damage
     private float nextDamageTime = 0f; // Cooldown for dealing damage
     private Vector2 moveDir;
+    private Knockback knockback; // Reference to the Knockback component
+    [SerializeField] private float knockbackForce = 15f; // Force applied during knockback
 
-
-    void Start()
+    private void Awake()
     {
-        // Get the Rigidbody2D component
+        // Get the Knockback component
+        knockback = GetComponent<Knockback>();
         rb = GetComponent<Rigidbody2D>();
         currenthp = hp;
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
-        if(playerObject != null)
+        if (playerObject != null)
         {
             player = playerObject.transform;
         }
     }
+    //void Start()
+    //{
+    //    // Get the Rigidbody2D component
+    //    knockback = GetComponent<Knockback>();
+    //    rb = GetComponent<Rigidbody2D>();
+    //    currenthp = hp;
+    //    GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+    //    if (playerObject != null)
+    //    {
+    //        player = playerObject.transform;
+    //    }
+    //}
 
     void Update()
     {
         // Check if player reference is set
-        if (player != null)
+        if (player != null && knockback.isKnockback == false)
         {
             MoveTo(player.position);
             rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
@@ -39,6 +54,7 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currenthp -= damage;
+        knockback.GetKnockback(PlayerMovement.Instance.transform, knockbackForce);
         Debug.Log("Enemy Health: " + currenthp);
         if (currenthp <= 0)
         {
@@ -60,7 +76,7 @@ public class EnemyAI : MonoBehaviour
             if (playerHealth != null && Time.time >= nextDamageTime)
             {
                 // Deal damage to the player
-                playerHealth.TakeDamage(damage);
+                playerHealth.PlayerTakeDamage(damage);
                 nextDamageTime = Time.time + damageCooldown;
             }
         }

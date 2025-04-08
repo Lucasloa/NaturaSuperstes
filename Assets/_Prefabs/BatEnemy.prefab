@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1497451786321687737}
   - component: {fileID: 1691146986867912723}
   - component: {fileID: 2559356579777826378}
+  - component: {fileID: -5316199690390814065}
   m_Layer: 0
   m_Name: BatEnemy
   m_TagString: EnemyBats
@@ -127,6 +128,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   moveSpeed: 2.5
+  hp: 1
+  knockbackForce: 15
 --- !u!70 &1691146986867912723
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -191,3 +194,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &-5316199690390814065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7532240574616737568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020c996c41de24148a8b39da461c6562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackTime: 0.2

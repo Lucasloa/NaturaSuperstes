@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8078791454731231336}
   - component: {fileID: 5117794027484223820}
-  - component: {fileID: 2035792933241094434}
   - component: {fileID: 653877415542028316}
   - component: {fileID: -3041351134622419543}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirePickup
   m_TagString: FirePickup
   m_Icon: {fileID: 0}
@@ -90,18 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2035792933241094434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7403638621198712622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18a17ab5a08249243b1ced4a155516d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &653877415542028316
 BoxCollider2D:
   m_ObjectHideFlags: 0

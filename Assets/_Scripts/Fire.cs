@@ -53,6 +53,7 @@ public class Fire : Element
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
+                gameObject.SetActive(false);
             }
         }
     }

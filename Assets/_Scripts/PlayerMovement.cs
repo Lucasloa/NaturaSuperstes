@@ -5,14 +5,15 @@ public class PlayerMovement : MonoBehaviour
 {
     public bool FacingLeft { get { return facingLeft; } set { facingLeft = value; } }
     [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private int PlayerHealth = 3;
+    [SerializeField] private float PlayerHealth = 3;
     [SerializeField] private TextMeshProUGUI hpText;
-    private int currentHealth;
+    private float currentHealth;
     private PlayerControls playerControls;
     private Vector2 movement;
     private Rigidbody2D rb;
     private Animator myAnimator;
     private SpriteRenderer mySpriteRenderer;
+    public static PlayerMovement Instance;
 
     private bool facingLeft = false;
 
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Awake()
     {
+        Instance = this;
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
@@ -35,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    //void Start()
+    //private void Start()
     //{
 
     //}
@@ -79,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
             FacingLeft = true;
         }
     }
-    public void TakeDamage(int damage)
+    public void PlayerTakeDamage(float damage)
     {
         currentHealth -= damage;
         Debug.Log("Player Health: " + currentHealth);
