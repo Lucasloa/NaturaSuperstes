@@ -9,7 +9,14 @@ public class Spawn : MonoBehaviour
     [field: SerializeField]
     public GameObject spawnMonster { get; set; }
     [field: SerializeField]
-    public int count { get; set; }
+    public int Batcount { get; set; }
+    [field: SerializeField]
+    public GameObject spawnGhost { get; set; }
+    [field: SerializeField]
+    public int Ghostcount { get; set; }
+
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,7 +26,8 @@ public class Spawn : MonoBehaviour
         //spawnObject(spawnMonster, Spawnpoints[1].transform.position);
         //spawnObject(spawnMonster, Spawnpoints[2].transform.position);
         //spawnObject(spawnMonster, Spawnpoints[3].transform.position);
-        StartCoroutine(SpawnCoroutine());
+        StartCoroutine(SpawnMonsterCoroutine());
+        StartCoroutine(SpawnGhostCoroutine());
     }
 
     // Update is called once per frame
@@ -32,15 +40,28 @@ public class Spawn : MonoBehaviour
     {
         Instantiate(spawnObject, spawnPosition, Quaternion.identity);
     }
-    IEnumerator SpawnCoroutine()
+    IEnumerator SpawnMonsterCoroutine()
     {
-        while (count > 0)
+        while (Batcount > 0)
         {
-            count--;
+            Batcount--;
             int randomSpawnPoint = Random.Range(0, Spawnpoints.Count);
             var randomOffset = Random.insideUnitSphere;
             var spawnPosition = Spawnpoints[randomSpawnPoint].transform.position + (Vector3)randomOffset;
             spawnObject(spawnMonster, spawnPosition);
+            yield return new WaitForSeconds(1);
+
+        }
+    }
+    IEnumerator SpawnGhostCoroutine()
+    {
+        while (Ghostcount > 0)
+        {
+            Ghostcount--;
+            int randomSpawnPoint = Random.Range(0, Spawnpoints.Count);
+            var randomOffset = Random.insideUnitSphere;
+            var spawnPosition = Spawnpoints[randomSpawnPoint].transform.position + (Vector3)randomOffset;
+            spawnObject(spawnGhost, spawnPosition);
             yield return new WaitForSeconds(1);
 
         }

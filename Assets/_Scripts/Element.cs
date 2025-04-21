@@ -3,7 +3,6 @@ using UnityEngine;
 
 public abstract class Element : MonoBehaviour
 {
-    public float Damage { get; set; }
     public float LevelBonus { get; set; }
     [SerializeField] public float attackDelay = 0.50f;
     public bool isAttacking = false;

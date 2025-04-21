@@ -5,7 +5,9 @@ public class EnemyAI : MonoBehaviour
     [field: SerializeField]
     public Transform player;       // Reference to the player's position
     public float moveSpeed = 5f;   // Movement speed of the object
-    private int damage = 1;        // Damage dealt to the player
+    [field: SerializeField]
+    private int damage = 5;        // Damage dealt to the player
+    [field: SerializeField]
     private float hp = 3;        // Health of the object
     private float currenthp;
     private Rigidbody2D rb;        // Rigidbody2D component

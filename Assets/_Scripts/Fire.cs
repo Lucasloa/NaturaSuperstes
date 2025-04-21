@@ -6,12 +6,12 @@ public class Fire : Element
 {
     //private Animator animator;
     //private bool IsFireAttacking = false;
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
     [SerializeField] private float levelBonus;
     [SerializeField] private GameObject projectilePrefab; // Reference to the projectile prefab
     [SerializeField] private float projectileSpeed = 10f; // Speed of the projectile    // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Transform fireballspawn;
-
+    [SerializeField] private float fireballlife;
     public Fire()
     {
     }
@@ -44,6 +44,7 @@ public class Fire : Element
         {
             rb.linearVelocity = new Vector2(projectileSpeed, 0);
         }
+        Destroy(projectile, fireballlife); // Destroy the projectile after set time
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {

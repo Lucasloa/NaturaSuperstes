@@ -9,6 +9,10 @@ TagManager:
   - Fireball
   - FirePickup
   - WaterPickup
+  - LightningPickup
+  - EarthPickup
+  - Lightning
+  - Earth
   layers:
   - Default
   - TransparentFX
@@ -18,7 +22,7 @@ TagManager:
   - UI
   - Enemy
   - Pickup
-  - 
+  - Earth
   - 
   - 
   - 

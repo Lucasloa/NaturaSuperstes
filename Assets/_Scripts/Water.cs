@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class Water : Element
 {
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
     [SerializeField] private float levelBonus;
     [SerializeField] private GameObject projectilePrefab; // Reference to the projectile prefab
     [SerializeField] private float projectileSpeed = 10f; // Speed of the projectile    // Start is called once before the first execution of Update after the MonoBehaviour is created
     [SerializeField] private Transform waterballspawn;
+    [SerializeField] private float waterlife;
+    public Water()
+    {
+    }
     void Start()
     {
 
@@ -18,7 +22,6 @@ public class Water : Element
     }
     public override void Attack()
     {
-        this.damage = damage;
 
         // Instantiate the projectile at the current position and rotation
         GameObject projectile = Instantiate(projectilePrefab, waterballspawn.position, Quaternion.identity);
@@ -28,6 +31,18 @@ public class Water : Element
         if (rb != null)
         {
             rb.linearVelocity = new Vector2(0, projectileSpeed);
+        }
+        Destroy(projectile, waterlife); // Destroy the projectile after set time
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("EnemyBats"))
+        {
+            EnemyAI enemy = collision.GetComponent<EnemyAI>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+            }
         }
     }
 }

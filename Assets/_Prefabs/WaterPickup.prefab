@@ -166,3 +166,5 @@ MonoBehaviour:
   levelBonus: 0
   projectilePrefab: {fileID: 405405269380325023, guid: c3905b9425feaa24da4d7744367c4833, type: 3}
   projectileSpeed: 10
+  waterballspawn: {fileID: 0}
+  waterlife: 0

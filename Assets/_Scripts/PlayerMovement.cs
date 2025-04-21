@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        UpdateHealthUI();
         currentHealth = PlayerHealth;
+        UpdateHealthUI();
     }
     private void Awake()
     {
